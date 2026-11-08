@@ -6,24 +6,19 @@ def solve():
     if not data:
         return
     n = int(data[0])
-    a = [int(x) for x in data[1:1+n]]
-    
+    a = [int(x) for x in data[1:]]
     possible = False
-    for mask in range(1 << n):
-        current_deg = 0
-        for i in range(n):
-            if (mask >> i) & 1:
-                current_deg += a[i]
+    for i in range(1 << n):
+        s = 0
+        for j in range(n):
+            if (i >> j) & 1:
+                s += a[j]
             else:
-                current_deg -= a[i]
-        if current_deg % 360 == 0:
+                s -= a[j]
+        if s % 360 == 0:
             possible = True
             break
-            
-    if possible:
-        print("YES")
-    else:
-        print("NO")
+    print("YES" if possible else "NO")
 
 if __name__ == '__main__':
     solve()
