@@ -1,13 +1,9 @@
 import sys
-import math
+from math import factorial
 
 def solve():
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    a = int(data[0])
-    b = int(data[1])
-    print(math.factorial(min(a, b)))
+    a, b = map(int, sys.stdin.readline().split())
+    print(factorial(min(a, b)))
 
 if __name__ == '__main__':
     solve()
