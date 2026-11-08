@@ -8,17 +8,16 @@ def solve():
     n = int(data[0])
     b = int(data[1])
     d = int(data[2])
-    a = [int(x) for x in data[3:3+n]]
-    
-    current_sum = 0
-    emptied = 0
+    a = [int(x) for x in data[3:]]
+    current = 0
+    empties = 0
     for x in a:
         if x <= b:
-            current_sum += x
-            if current_sum > d:
-                emptied += 1
-                current_sum = 0
-    print(emptied)
+            current += x
+            if current > d:
+                empties += 1
+                current = 0
+    print(empties)
 
 if __name__ == '__main__':
     solve()
