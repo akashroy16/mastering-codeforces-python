@@ -1,28 +1,30 @@
 import sys
-import math
 
 def solve():
-    lines = sys.stdin.read().split()
-    if not lines:
-        return
-    s1 = lines[0]
-    s2 = lines[1]
-    
-    target = s1.count('+') - s1.count('-')
-    curr = s2.count('+') - s2.count('-')
-    q_count = s2.count('?')
-    
-    needed = target - curr
-    if (needed + q_count) % 2 != 0 or abs(needed) > q_count:
-        print("0.000000000000")
-        return
-        
-    plus_needed = (needed + q_count) // 2
-    ways = math.comb(q_count, plus_needed)
-    total_ways = 1 << q_count
-    
-    ans = ways / total_ways
-    print(f"{ans:.12f}")
+    s1 = sys.stdin.readline().strip()
+    s2 = sys.stdin.readline().strip()
+    target = sum(1 if c == '+' else -1 for c in s1)
+    current = 0
+    unknowns = 0
+    for c in s2:
+        if c == '+':
+            current += 1
+        elif c == '-':
+            current -= 1
+        else:
+            unknowns += 1
+    favorable = 0
+    total = 1 << unknowns
+    for i in range(total):
+        pos = current
+        for j in range(unknowns):
+            if (i >> j) & 1:
+                pos += 1
+            else:
+                pos -= 1
+        if pos == target:
+            favorable += 1
+    print(f"{favorable / total:.12f}")
 
 if __name__ == '__main__':
     solve()
