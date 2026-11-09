@@ -10,15 +10,14 @@ def solve():
     out = []
     for _ in range(t):
         n = int(data[idx])
-        k = int(data[idx+1])
-        a = [int(x) for x in data[idx+2:idx+2+k]]
-        idx += 2 + k
-        
-        max_piece = max(a)
+        k = int(data[idx + 1])
+        idx += 2
+        a = [int(x) for x in data[idx : idx + k]]
+        idx += k
+        a.sort()
         ops = 0
-        for x in a:
-            ops += (2 * x - 1)
-        ops -= (2 * max_piece - 1)
+        for i in range(k - 1):
+            ops += 2 * a[i] - 1
         out.append(str(ops))
     print("\n".join(out))
 
