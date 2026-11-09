@@ -10,26 +10,22 @@ def solve():
     out = []
     for _ in range(t):
         n = int(data[idx])
-        a = [int(x) for x in data[idx+1:idx+1+n]]
-        idx += 1 + n
-        
-        seen = {0}
-        curr_sum = 0
-        found = False
+        idx += 1
+        a = [int(x) for x in data[idx : idx + n]]
+        idx += n
         for i in range(n):
-            if i % 2 == 0:
-                curr_sum += a[i]
-            else:
-                curr_sum -= a[i]
-            if curr_sum in seen:
+            if i % 2 == 1:
+                a[i] = -a[i]
+        seen = {0}
+        curr = 0
+        found = False
+        for x in a:
+            curr += x
+            if curr in seen:
                 found = True
                 break
-            seen.add(curr_sum)
-            
-        if found:
-            out.append("YES")
-        else:
-            out.append("NO")
+            seen.add(curr)
+        out.append("YES" if found else "NO")
     print("\n".join(out))
 
 if __name__ == '__main__':
