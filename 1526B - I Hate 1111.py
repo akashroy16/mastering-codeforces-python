@@ -6,18 +6,18 @@ def solve():
     if not data:
         return
     t = int(data[0])
+    idx = 1
     out = []
-    for i in range(1, t + 1):
-        x = int(data[i])
-        possible = False
-        for a in range(11):
-            if x >= 111 * a and (x - 111 * a) % 11 == 0:
-                possible = True
-                break
-        if possible:
+    for _ in range(t):
+        x = int(data[idx])
+        idx += 1
+        if x >= 111 * 11:
             out.append("YES")
         else:
-            out.append("NO")
+            if x % 11 <= x // 111:
+                out.append("YES")
+            else:
+                out.append("NO")
     print("\n".join(out))
 
 if __name__ == '__main__':
