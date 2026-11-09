@@ -7,27 +7,22 @@ def solve():
         return
     n = int(data[0])
     k = int(data[1])
-    a = [int(x) for x in data[2:2+n]]
-    
+    a = [int(x) for x in data[2:]]
     a.sort()
-    mid = n // 2
-    
-    low = a[mid]
-    high = a[mid] + k
+    low = a[n // 2]
+    high = low + k
     ans = low
-    
     while low <= high:
-        m = (low + high) // 2
-        ops = 0
-        for i in range(mid, n):
-            if m > a[i]:
-                ops += m - a[i]
-        if ops <= k:
-            ans = m
-            low = m + 1
+        mid = (low + high) // 2
+        req = 0
+        for i in range(n // 2, n):
+            if a[i] < mid:
+                req += mid - a[i]
+        if req <= k:
+            ans = mid
+            low = mid + 1
         else:
-            high = m - 1
-            
+            high = mid - 1
     print(ans)
 
 if __name__ == '__main__':
