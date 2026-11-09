@@ -10,20 +10,23 @@ def solve():
     out = []
     for _ in range(t):
         n = int(data[idx])
-        c = int(data[idx+1])
-        s = [int(x) for x in data[idx+2:idx+2+n]]
-        idx += 2 + n
-        
-        low = 1
-        high = 10**9
-        ans = 1
+        c = int(data[idx + 1])
+        idx += 2
+        s = [int(x) for x in data[idx : idx + n]]
+        idx += n
+        low, high = 1, 10**9
+        ans = 0
         while low <= high:
             mid = (low + high) // 2
-            total_area = sum((x + 2 * mid) ** 2 for x in s)
-            if total_area == c:
+            total = 0
+            for side in s:
+                total += (side + 2 * mid) ** 2
+                if total > c:
+                    break
+            if total == c:
                 ans = mid
                 break
-            elif total_area < c:
+            elif total < c:
                 ans = mid
                 low = mid + 1
             else:
