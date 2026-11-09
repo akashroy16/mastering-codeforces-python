@@ -10,23 +10,23 @@ def solve():
     out = []
     for _ in range(t):
         n = int(data[idx])
-        f = int(data[idx+1])
-        k = int(data[idx+2])
-        a = [int(x) for x in data[idx+3:idx+3+n]]
-        idx += 3 + n
-        
-        target_val = a[f - 1]
+        f = int(data[idx + 1])
+        k = int(data[idx + 2])
+        idx += 3
+        a = [int(x) for x in data[idx : idx + n]]
+        idx += n
+        target = a[f - 1]
         a.sort(reverse=True)
-        
-        if a[k - 1] < target_val:
+        rem = a[k:]
+        take = a[:k]
+        in_take = target in take
+        in_rem = target in rem
+        if in_take and in_rem:
+            out.append("MAYBE")
+        elif in_take:
             out.append("YES")
-        elif a[k - 1] > target_val:
-            out.append("NO")
         else:
-            if k < n and a[k] == target_val:
-                out.append("MAYBE")
-            else:
-                out.append("YES")
+            out.append("NO")
     print("\n".join(out))
 
 if __name__ == '__main__':
