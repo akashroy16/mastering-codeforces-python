@@ -1,7 +1,5 @@
 import sys
 
-MOD = 10**9 + 7
-
 def solve():
     input = sys.stdin.read
     data = input().split()
@@ -10,9 +8,10 @@ def solve():
     t = int(data[0])
     idx = 1
     out = []
+    MOD = 10**9 + 7
     for _ in range(t):
         n = int(data[idx])
-        k = int(data[idx+1])
+        k = int(data[idx + 1])
         idx += 2
         out.append(str(pow(n, k, MOD)))
     print("\n".join(out))
