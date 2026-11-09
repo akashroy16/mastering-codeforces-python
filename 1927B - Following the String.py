@@ -1,4 +1,5 @@
 import sys
+import string
 
 def solve():
     input = sys.stdin.read
@@ -8,19 +9,20 @@ def solve():
     t = int(data[0])
     idx = 1
     out = []
+    alphabet = list(string.ascii_lowercase)
     for _ in range(t):
         n = int(data[idx])
-        a = [int(x) for x in data[idx+1:idx+1+n]]
-        idx += 1 + n
-        
-        counts = [0] * 26
+        idx += 1
+        a = [int(x) for x in data[idx : idx + n]]
+        idx += n
+        counts = {i: [] for i in range(n + 1)}
+        for char in alphabet:
+            counts[0].append(char)
         res = []
-        for count in a:
-            for i in range(26):
-                if counts[i] == count:
-                    res.append(chr(ord('a') + i))
-                    counts[i] += 1
-                    break
+        for x in a:
+            char = counts[x].pop(0)
+            res.append(char)
+            counts[x + 1].append(char)
         out.append("".join(res))
     print("\n".join(out))
 
