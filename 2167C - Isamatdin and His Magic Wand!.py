@@ -6,10 +6,15 @@ def solve():
     if not data:
         return
     t = int(data[0])
+    idx = 1
     out = []
-    for i in range(1, t + 1):
-        n = int(data[i])
-        out.append(str(n))
+    for _ in range(t):
+        n = int(data[idx])
+        idx += 1
+        a = [int(x) for x in data[idx : idx + n]]
+        idx += n
+        a.sort()
+        out.append(" ".join(map(str, a)))
     print("\n".join(out))
 
 if __name__ == '__main__':
