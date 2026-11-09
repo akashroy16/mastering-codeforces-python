@@ -1,5 +1,4 @@
 import sys
-import math
 
 def solve():
     input = sys.stdin.read
@@ -11,13 +10,13 @@ def solve():
     out = []
     for _ in range(t):
         x = int(data[idx])
-        y = int(data[idx+1])
+        y = int(data[idx + 1])
         idx += 2
-        
-        screens = math.ceil(y / 2)
+        screens = (y + 1) // 2
         rem_cells = screens * 15 - y * 4
         if x > rem_cells:
-            screens += math.ceil((x - rem_cells) / 15)
+            needed = x - rem_cells
+            screens += (needed + 14) // 15
         out.append(str(screens))
     print("\n".join(out))
 
